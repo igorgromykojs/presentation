@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>reveal.js</title>
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	<style type="text/css">
+		.first {
+			height: 90vh;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h3>Introduction</h3>
+				<hr>
+				<br>
+				<img src="img/dry.jpg" alt="dry">
+			</section>
+			<section>
+				<h3>What is DRY?</h3>
+				<hr>
+				<br>
+				<img src="img/slide2.png" alt="slide2">
+			</section>
+			<section>
+				<h3>The Importance of DRY</h3>
+				<hr>
+				<br>
+				DRY is crucial for several reasons:
+				<br>
+				<br>
+				<ul>
+					<li>Code Maintenance and Consistency</li>
+					<li>Readability and Understandability</li>
+					<li>Efficiency and Performance</li>
+					<li>Scalability</li>
+					<li>Bug Reduction and Debugging</li>
+					<li>Code Reusability</li>
+					<li>Consistency in User Experience</li>
+					<li>Collaboration and Teamwork</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Identifying Code Duplication</h3>
+				<hr>
+				<br>
+				Before we can eliminate duplication, we need to be able to identify it. Here are a few common signs of code
+				duplication:
+				<br>
+				<br>
+				<ul>
+					<li>Repeated Blocks</li>
+					<li>Copy-Pasting</li>
+					<li>Similar Functions</li>
+				</ul>
+			</section>
+			<section>
+				<section>
+					<h3>Techniques to Achieve DRY</h3>
+					<hr>
+					<br>
+					Now that we understand the importance of DRY, let's explore some techniques to achieve it:
+					<br>
+					<br>
+					<ul>
+						<li>Extract Reusable Functions</li>
+						<li>Utilize Helper Libraries</li>
+						<li>Template Strings</li>
+					</ul>
+				</section>
+				<section>
+					Extract Reusable Functions:
+					<pre class="first"><code class="javascript1"  data-language="javascript">
+// Before DRY:
+function calculateAreaOfRectangle(length, width) {
+  return length * width;
+}
+function calculatePerimeterOfRectangle(length, width) {
+  return 2 * (length + width);
+}
+
+// After DRY:
+function calculateRectangle(length, width, operation) {
+  if (operation === 'area') {
+    return length * width;
+  } else if (operation === 'perimeter') {
+    return 2 * (length + width);
+  }
+}
+
+const area = calculateRectangle(5, 3, 'area'); // Output: 15
+const perimeter = calculateRectangle(5, 3, 'perimeter'); 
+// Output: 16
+					  </code></pre>
+				</section>
+				<section>
+					Utilize Helper Libraries:
+					<pre class="second"><code class="javascript2" data-language="javascript">
+// Using a custom utility function:
+function capitalizeFirstLetter(str) {
+	return str.charAt(0).toUpperCase() + str.slice(1);
+}
+							
+const name = 'john do';
+console.log(capitalizeFirstLetter(name)); // Output: "John do"
+							
+// Using an external utility library (e.g., Lodash):
+const lodash = require('lodash');
+							
+const name2 = 'jane smith';
+console.log(lodash.capitalize(name2)); // Output: "Jane smith"
+					  </code></pre>
+				</section>
+				<section>
+					Template Strings:
+					<pre class="third"><code class="javascript3" data-language="javascript">
+const name = 'John';
+const age = 30;
+						
+// Before DRY:
+const greet = 'Hello, ' + name + '! You are ' + age + ' y.o.';
+						
+// After DRY:
+const greetTemplate = `Hello, ${name}! You are ${age} y.o.`;
+console.log(greetingTemplate); 
+// Output: "Hello, John! You are 30 y.o."
+					  </code></pre>
+				</section>
+				<!-- <section>
+					Higher-Order Functions:
+					<pre class="fourth"><code class="javascript" data-language="javascript">
+// Before DRY:
+function applyOperation(arr, operation) {
+	const result = [];
+	for (let i = 0; i < arr.length; i++) {
+		result.push(operation(arr[i]));
+	}
+	return result;
+}
+						
+const numbers = [1, 2, 3, 4, 5];
+const squared = applyOperation(numbers, (num) => num * num);
+console.log(squared); // Output: [1, 4, 9, 16, 25]
+						
+// After DRY:
+function multiplyBy(factor) {
+	return function (number) {
+		return number * factor;
+	};
+}
+						
+const double = multiplyBy(2);
+const triple = multiplyBy(3);
+						
+console.log(double(5)); // Output: 10
+console.log(triple(5)); // Output: 15			
+					  </code></pre>
+				</section> -->
+			</section>
+			<section>
+				<h3>The DRY Pitfalls</h3>
+				<hr>
+				<br>
+				<img src="img/slide3.jpg" alt="">
+			</section>
+			<section>
+				<h3>Conclusion</h3>
+				<hr>
+				<br>
+			</section>
+		</div>
+	</div>
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true, 
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+		});
+	</script>
+</body>
+
+</html>
