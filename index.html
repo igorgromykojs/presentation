@@ -14,7 +14,7 @@
 	<!-- Theme used for syntax highlighted code -->
 	<link rel="stylesheet" href="plugin/highlight/monokai.css">
 	<style type="text/css">
-		.first {
+		.first, .second {
 			height: 90vh;
 		}
 	</style>
@@ -57,8 +57,7 @@
 				<h3>Identifying Code Duplication</h3>
 				<hr>
 				<br>
-				Before we can eliminate duplication, we need to be able to identify it. Here are a few common signs of code
-				duplication:
+				Here are a few common signs of code duplication:
 				<br>
 				<br>
 				<ul>
@@ -77,7 +76,7 @@
 					<br>
 					<ul>
 						<li>Extract Reusable Functions</li>
-						<li>Utilize Helper Libraries</li>
+						<li>Higher-order functions</li>
 						<li>Template Strings</li>
 					</ul>
 				</section>
@@ -107,21 +106,30 @@ const perimeter = calculateRectangle(5, 3, 'perimeter');
 					  </code></pre>
 				</section>
 				<section>
-					Utilize Helper Libraries:
+					Higher-order functions
 					<pre class="second"><code class="javascript2" data-language="javascript">
-// Using a custom utility function:
-function capitalizeFirstLetter(str) {
-	return str.charAt(0).toUpperCase() + str.slice(1);
+// Before DRY:
+function applyOperation(arr, operation) {
+	const result = [];
+	for (let i = 0; i < arr.length; i++) {
+		result.push(operation(arr[i]));
+	}
+	return result;
 }
-							
-const name = 'john do';
-console.log(capitalizeFirstLetter(name)); // Output: "John do"
-							
-// Using an external utility library (e.g., Lodash):
-const lodash = require('lodash');
-							
-const name2 = 'jane smith';
-console.log(lodash.capitalize(name2)); // Output: "Jane smith"
+const numbers = [1, 2, 3, 4, 5];
+const squared = applyOperation(numbers, (num) => num * num);
+console.log(squared); // Output: [1, 4, 9, 16, 25]
+
+// After DRY:
+function multiplyBy(factor) {
+	return function (number) {
+		return number * factor;
+	};
+}
+const double = multiplyBy(2);
+const triple = multiplyBy(3);
+console.log(double(5)); // Output: 10
+console.log(triple(5)); // Output: 15
 					  </code></pre>
 				</section>
 				<section>
